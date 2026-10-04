@@ -40,6 +40,21 @@ def consultar_estoque(produto: str):
 
     respostas = []
 
+    palavras_estoque = [
+        "o que tem",
+        "o que possui",
+        "quais produtos",
+        "lista de produtos",
+        "todos os produtos",
+        "estoque"
+    ]
+
+    if any(palavra in pergunta for palavra in palavras_estoque):
+        return " ".join(
+            f"{quantidade} unidades de {nome_produto}"
+            for nome_produto, quantidade in estoque.items()
+        )
+
     for nome_produto, quantidade in estoque.items():
         nome_normalizado = unicodedata.normalize(
             "NFKD", nome_produto.lower()
